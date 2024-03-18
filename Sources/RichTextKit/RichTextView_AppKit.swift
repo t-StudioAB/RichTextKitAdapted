@@ -109,15 +109,38 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
-        attributedString = .empty
+        print("Setup called with text format: \(format)")
+        print("Initial attributed string length: \(text.length)")
+
+        // Debug the font attributes of the incoming text
+        if text.length > 0 {
+            let initialAttributes = text.attributes(at: 0, effectiveRange: nil)
+            print("Initial attributes at start of text: \(initialAttributes)")
+        }
+
+        attributedString = .empty // Assuming this resets the attributedString
+        print("AttributedString reset to empty")
+
         attributedString = text
+        print("AttributedString set with incoming text: \(attributedString)")
+
         allowsImageEditing = true
         allowsUndo = true
+
         imageConfiguration = standardImageConfiguration(for: format)
+        print("Image configuration set for format: \(format)")
+
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
+        print("Default attachment scaling set to scaleProportionallyDown")
+
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        print("Content compression resistance priority set for horizontal axis")
+
         setupConfiguration()
+        print("Custom setupConfiguration called")
+
         setupTheme()
+        print("Custom setupTheme called")
     }
 
     // MARK: - Internal

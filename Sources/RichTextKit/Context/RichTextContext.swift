@@ -20,7 +20,7 @@ import Combine
  app up to date with the current state. The ``RichTextEditor``
  uses this with a ``RichTextCoordinator`` to keep it updated.
  */
-public class RichTextContext: ObservableObject {
+public class RichTextContext: ObservableObject  {
 
     /// Create a new rich text context instance.
     public init() {}
@@ -179,6 +179,8 @@ public extension RichTextContext {
     /// Reset the attributed string.
     func resetAttributedString() {
         setAttributedString(to: "")
+        print("resetAttributedString is \(resetHighlightedRange)")
+
     }
 
     /// Reset the ``highlightedRange``.
