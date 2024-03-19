@@ -59,8 +59,9 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
                 alignmentPicker(value: $context.textAlignment)
                superscriptButtons(for: context, greedy: false)
                indentButtons(for: context, greedy: false)
+                colorPickers(for: context)
             Divider()
-               // colorPickers(for: context)
+
         }
        // .environment(\.sizeCategory, .small)
         #if macOS

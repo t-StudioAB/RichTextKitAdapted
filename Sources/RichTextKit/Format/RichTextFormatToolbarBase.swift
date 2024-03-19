@@ -47,7 +47,6 @@ extension RichTextFormatToolbarBase {
         for context: RichTextContext
     ) -> some View {
         if hasColorPickers {
-            VStack(spacing: style.spacing) {
                 colorPickers(
                     for: config.colorPickers,
                     context: context
@@ -56,7 +55,6 @@ extension RichTextFormatToolbarBase {
                     for: config.colorPickersDisclosed,
                     context: context
                 )
-            }
         }
     }
 
@@ -93,8 +91,8 @@ extension RichTextFormatToolbarBase {
     ) -> some View {
         RichTextColor.Picker(
             type: color,
-            value: context.binding(for: color),
-            quickColors: .quickPickerColors
+            value: context.binding(for: color)
+            //quickColors: .quickPickerColors
         )
     }
 

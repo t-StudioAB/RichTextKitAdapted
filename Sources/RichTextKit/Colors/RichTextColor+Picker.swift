@@ -55,18 +55,16 @@ public extension RichTextColor {
         private var colorScheme
 
         public var body: some View {
-            HStack(spacing: 0) {
-                iconView
+            //    iconView
                 picker
-                if hasColors {
-                    HStack(spacing: spacing) {
-                        quickPickerDivider
-                        quickPickerButton(for: nil)
-                        quickPickerDivider
-                    }
-                    quickPicker
-                }
-            }
+//                if hasColors {
+//                    HStack(spacing: spacing) {
+//                        //quickPickerDivider
+//                       // quickPickerButton(for: nil)
+//                        quickPickerDivider
+//                    }
+//                    quickPicker
+//                }
             .labelsHidden()
         }
     }
@@ -113,8 +111,6 @@ private extension RichTextColor.Picker {
     var picker: some View {
         #if iOS || macOS || os(visionOS)
         ColorPicker("", selection: $value)
-            .fixedSize()
-            .padding(.horizontal, spacing)
         #endif
     }
 
