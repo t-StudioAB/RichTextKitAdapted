@@ -73,7 +73,9 @@ public extension RichTextStyle {
             SwiftUI.Toggle(isOn: value) {
                 style.icon
                     .frame(maxHeight: fillVertically ? .infinity : nil)
-            }        .buttonStyle(.plain)
+            }       // .buttonStyle(.plain)
+                .background(.clear)
+
 
             .keyboardShortcut(for: style)
             .accessibilityLabel(style.title)

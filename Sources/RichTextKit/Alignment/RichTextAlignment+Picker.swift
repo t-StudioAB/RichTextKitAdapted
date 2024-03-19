@@ -45,6 +45,8 @@ public extension RichTextAlignment {
                         .labelStyle(.iconOnly)
                 }
             }
+            .buttonStyle(.plain)
+
             .labelsHidden()
             .accessibilityLabel(RTKL10n.textAlignment.text)
         }

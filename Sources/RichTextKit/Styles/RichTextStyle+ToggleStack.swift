@@ -51,6 +51,8 @@ public extension RichTextStyle {
                         context: context,
                         fillVertically: true
                     )
+                    .background(.clear)
+
                 }
             }
             .fixedSize(horizontal: false, vertical: true)

@@ -68,8 +68,10 @@ public extension RichTextStyle {
                     .frame(maxHeight: fillVertically ? .infinity : nil)
                     .contentShape(Rectangle())
             }
+
             .buttonStyle(.plain)
             .tint(.accentColor, if: isOn)
+            .background(.green)
             .foreground(.accentColor, if: isOn)
             .keyboardShortcut(for: style)
             .accessibilityLabel(style.title)
@@ -133,20 +135,23 @@ struct RichTextStyle_Button_Previews: PreviewProvider {
                 RichTextStyle.Button(
                     style: .bold,
                     value: $isBoldOn
-                )
+                ).buttonStyle(.plain)
+
                 RichTextStyle.Button(
                     style: .italic,
                     value: $isItalicOn
-                )
+                )                    .buttonStyle(.plain)
+
                 RichTextStyle.Button(
                     style: .strikethrough,
                     value: $isStrikethroughOn
-                )
+                )                    .buttonStyle(.plain)
+
                 RichTextStyle.Button(
                     style: .underlined,
                     value: $isUnderlinedOn
                 )
-                .buttonStyle(.bordered)
+                .buttonStyle(.plain)
             }
             .padding()
             .foregroundColor(.red)

@@ -59,15 +59,23 @@ public extension RichTextStyle {
 
         public var body: some View {
             #if macOS
-            ControlGroup {
+           ControlGroup {
                 ForEach(styles) {
                     RichTextStyle.Toggle(
                         style: $0,
                         context: context,
                         fillVertically: true
-                    ).buttonStyle(.plain)
+                    )                    
+                    //.buttonStyle(.plain)
                 }
-            }
+               // .buttonStyle(.plain)
+
+           }
+//           .buttonStyle(.plain)
+
+
+            
+
 
              //.background(.green) // This line of code.
 

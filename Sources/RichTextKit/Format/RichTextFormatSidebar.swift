@@ -49,43 +49,33 @@ public struct RichTextFormatSidebar: RichTextFormatToolbarBase {
     var style
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: style.spacing) {
-            SidebarSection {
+        VStack(alignment: .leading) {
                 fontPicker(value: $context.fontName)
                 HStack {
                     styleToggleGroup(for: context)
-                    Spacer()
+                   // Spacer()
                     fontSizePicker(for: context)
                 }
-            }
 
             Divider()
 
-            SidebarSection {
                 alignmentPicker(value: $context.textAlignment)
-                HStack {
+            
                     lineSpacingPicker(for: context)
-                }
                 HStack {
                     indentButtons(for: context, greedy: true)
                     superscriptButtons(for: context, greedy: true)
                 }
-            }
 
             Divider()
 
             if hasColorPickers {
-                SidebarSection {
                     colorPickers(for: context)
-                }
-                .padding(.trailing, -8)
                 Divider()
             }
 
             Spacer()
         }
-        .padding(style.padding - 2)
-        .background(Color.white.opacity(0.05))
     }
 }
 

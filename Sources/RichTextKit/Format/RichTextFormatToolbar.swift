@@ -49,18 +49,21 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
     private var horizontalSizeClass
 
     public var body: some View {
-        VStack(spacing: style.spacing) {
-            controls
-            if hasColorPickers {
-                Divider()
+        HStack(spacing: style.spacing) {
+                #if macOS
+                fontPicker(value: $context.fontName)
+                #endif
+                styleToggleGroup(for: context)
+                fontSizePicker(for: context)
+            
+                alignmentPicker(value: $context.textAlignment)
+               // superscriptButtons(for: context, greedy: false)
+               // indentButtons(for: context, greedy: false)
+            Divider()
                 colorPickers(for: context)
-            }
         }
-        .padding(.vertical, style.padding)
-        .environment(\.sizeCategory, .medium)
-        .background(background)
+        .environment(\.sizeCategory, .small)
         #if macOS
-        .frame(minWidth: 650)
         #endif
     }
 }
@@ -109,13 +112,8 @@ private extension RichTextFormatToolbar {
             fontPicker(value: $context.fontName)
             #endif
             styleToggleGroup(for: context)
-            if !useSingleLine {
-                Spacer()
-            }
             fontSizePicker(for: context)
-            if horizontalSizeClass == .regular {
-                Spacer()
-            }
+        
         }
         HStack {
             alignmentPicker(value: $context.textAlignment)
