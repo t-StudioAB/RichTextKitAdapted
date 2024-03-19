@@ -94,6 +94,8 @@ extension RichTextFormatToolbarBase {
             value: context.binding(for: color)
             //quickColors: .quickPickerColors
         )
+        //.border(.orange)
+
     }
 
     @ViewBuilder

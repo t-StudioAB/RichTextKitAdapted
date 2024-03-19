@@ -57,6 +57,7 @@ public extension RichTextColor {
         public var body: some View {
             //    iconView
                 picker
+                //.border(.blue)
 //                if hasColors {
 //                    HStack(spacing: spacing) {
 //                        //quickPickerDivider

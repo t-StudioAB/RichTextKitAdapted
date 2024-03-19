@@ -52,14 +52,24 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
         HStack() {
                 #if macOS
                 fontPicker(value: $context.fontName)
+              //  .border(.yellow)
+
                 #endif
                 styleToggleGroup(for: context)
+              //  .border(.purple)
+
                 fontSizePicker(for: context)
+             //   .border(.green)
             
+            colorPickers(for: context)
+            //.border(.orange)
+
                 alignmentPicker(value: $context.textAlignment)
+              //  .border(.blue)
+
                superscriptButtons(for: context, greedy: false)
                indentButtons(for: context, greedy: false)
-                colorPickers(for: context)
+              
             Divider()
 
         }
