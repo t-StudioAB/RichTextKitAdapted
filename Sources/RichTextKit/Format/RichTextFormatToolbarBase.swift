@@ -103,7 +103,8 @@ extension RichTextFormatToolbarBase {
         value: Binding<String>
     ) -> some View {
         if config.fontPicker {
-            RichTextFont.Picker(selection: value, fontSize: 12) .buttonStyle(.plain)
+            RichTextFont.Picker(selection: value, fontSize: 12) 
+                //.buttonStyle(.plain)
         }
     }
 
@@ -113,7 +114,7 @@ extension RichTextFormatToolbarBase {
     ) -> some View {
         if config.fontSizePicker {
             RichTextFont.SizePickerStack(context: context)
-                .buttonStyle(.plain)
+               // .buttonStyle(.plain)
 
         }
     }
@@ -128,7 +129,8 @@ extension RichTextFormatToolbarBase {
                 context: context,
                 actions: [.stepIndent(points: -30), .stepIndent(points: 30)],
                 greedy: greedy
-            ).buttonStyle(.plain)
+            )
+            .buttonStyle(.plain)
         }
     }
 

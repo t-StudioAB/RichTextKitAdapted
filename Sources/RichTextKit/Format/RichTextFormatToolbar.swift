@@ -49,7 +49,7 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
     private var horizontalSizeClass
 
     public var body: some View {
-        HStack(spacing: style.spacing) {
+        HStack() {
                 #if macOS
                 fontPicker(value: $context.fontName)
                 #endif
@@ -57,12 +57,12 @@ public struct RichTextFormatToolbar: RichTextFormatToolbarBase {
                 fontSizePicker(for: context)
             
                 alignmentPicker(value: $context.textAlignment)
-               // superscriptButtons(for: context, greedy: false)
-               // indentButtons(for: context, greedy: false)
+               superscriptButtons(for: context, greedy: false)
+               indentButtons(for: context, greedy: false)
             Divider()
-                colorPickers(for: context)
+               // colorPickers(for: context)
         }
-        .environment(\.sizeCategory, .small)
+       // .environment(\.sizeCategory, .small)
         #if macOS
         #endif
     }

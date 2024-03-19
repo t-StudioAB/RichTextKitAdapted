@@ -43,10 +43,11 @@ public extension RichTextAlignment {
                 ForEach(values) { value in
                     value.label
                         .labelStyle(.iconOnly)
+
                 }
             }
             .buttonStyle(.plain)
-
+            .pickerStyle(.menu)
             .labelsHidden()
             .accessibilityLabel(RTKL10n.textAlignment.text)
         }
