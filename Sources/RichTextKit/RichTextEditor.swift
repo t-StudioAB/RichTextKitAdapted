@@ -111,13 +111,13 @@ public struct RichTextEditor: ViewRepresentable {
     #else
 
     public func makeNSView(context: Context) -> some NSView {
-        print("makeNSView called")
+        //   print("makeNSView called")
         if text.wrappedValue.length > 0 {
             let attributes = text.wrappedValue.attributes(at: 0, effectiveRange: nil)
-            print("Attributes before setup in makeNSView: \(attributes)")
+            //    print("Attributes before setup in makeNSView: \(attributes)")
         }
 
-        print("Initial attributed string inside makeNSView : \(text.wrappedValue.string.prefix(100))") // Print the first 100 characters for brevity
+        //    print("Initial attributed string inside makeNSView : \(text.wrappedValue.string.prefix(100))") // Print the first 100 characters for brevity
         
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
@@ -126,13 +126,13 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     public func updateNSView(_ view: NSViewType, context: Context) {
-        print("updateNSView called")
+      //  print("updateNSView called")
             let attributedString = text.wrappedValue
-            print("Updated attributed string inside updateNSView: \(attributedString.string.prefix(100))") // Print the first 100 characters for brevity
+        //   print("Updated attributed string inside updateNSView: \(attributedString.string.prefix(100))") // Print the first 100 characters for brevity
 
             // Print attributes of the entire attributed string
             attributedString.enumerateAttributes(in: NSRange(location: 0, length: attributedString.length), options: []) { attributes, range, _ in
-                print("Attributes inside updateNSView in range \(range): \(attributes)")
+                //     print("Attributes inside updateNSView in range \(range): \(attributes)")
             }
     }
     #endif

@@ -186,7 +186,7 @@ public extension RichTextContext {
     /// Reset the ``highlightedRange``.
     func resetHighlightedRange() {
         guard hasHighlightedRange else {
-            print("Attempted to reset highlighted range, but none was set.")
+           // print("Attempted to reset highlighted range, but none was set.")
             return
         }
         highlightedRange = nil

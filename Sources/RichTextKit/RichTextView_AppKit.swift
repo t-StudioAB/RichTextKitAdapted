@@ -109,20 +109,20 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         with text: NSAttributedString,
         format: RichTextDataFormat
     ) {
-        print("Setup called with text format: \(format)")
-        print("Initial attributed string length: \(text.length)")
+//        print("Setup called with text format: \(format)")
+//        print("Initial attributed string length: \(text.length)")
 
         // Debug the font attributes of the incoming text
         if text.length > 0 {
             let initialAttributes = text.attributes(at: 0, effectiveRange: nil)
-            print("Initial attributes at start of text: \(initialAttributes)")
+         //   print("Initial attributes at start of text: \(initialAttributes)")
         }
 
         attributedString = .empty // Assuming this resets the attributedString
-        print("AttributedString reset to empty")
+        //print("AttributedString reset to empty")
 
         attributedString = text
-        print("AttributedString set with incoming text: \(attributedString)")
+       // print("AttributedString set with incoming text: \(attributedString)")
 
         allowsImageEditing = true
         allowsUndo = true
