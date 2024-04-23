@@ -19,7 +19,7 @@ public extension RichTextView {
         ///   - isScrollingEnabled: Whether or not the editor should scroll, by default `true`.
         ///   - isContinuousSpellCheckingEnabled: Whether the editor spell-checks in realtime. Defaults to `true`.
         public init(
-            isScrollingEnabled: Bool = true,
+            isScrollingEnabled: Bool = false,
             isContinuousSpellCheckingEnabled: Bool = true
         ) {
             self.isScrollingEnabled = isScrollingEnabled
