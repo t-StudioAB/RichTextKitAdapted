@@ -46,6 +46,18 @@ open class RichTextCoordinator: NSObject {
         textView.isEditable = richTextContext.isEditable
         textView.isSelectable = richTextContext.isSelectable
 
+     if let scrollView = textView.enclosingScrollView {
+    // Disable scrolling
+   // textView.isScrollable = false
+    scrollView.hasVerticalScroller = false
+    scrollView.hasHorizontalScroller = false
+    
+    // Hide scroll indicators
+    scrollView.verticalScroller?.isHidden = true
+    scrollView.horizontalScroller?.isHidden = true
+}
+
+
         self.context = richTextContext
         super.init()
         self.textView.delegate = self
