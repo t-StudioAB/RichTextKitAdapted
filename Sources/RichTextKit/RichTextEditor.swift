@@ -1,4 +1,3 @@
-//
 //  RichTextEditor.swift
 //  RichTextKit
 //
@@ -12,56 +11,52 @@ import SwiftUI
 /**
  This SwiftUI editor can be used to view and edit rich text.
 
- The view uses a platform-specific ``RichTextView`` together
- with a ``RichTextContext`` and a ``RichTextCoordinator`` to
+ The view uses a platform-specific `RichTextView together
+ with a `RichTextContext and a RichTextCoordinator to
  make view and context changes sync correctly.
 
  You can use the provided context to trigger and observe any
  changes to the text editor. Note that changing the value of
- the `text` binding will not yet update the editor. Until it
- is fixed, use `setAttributedString(to:)`.
+ the text binding will not yet update the editor. Until it
+ is fixed, use setAttributedString(to:).
 
- Since the view wraps a native `UIKit` or `AppKit` text view,
- you can't apply `.toolbar` modifiers to it, like you can do
+ Since the view wraps a native UIKit or AppKit text view,
+ you can't apply .toolbar modifiers to it, like you can do
  with other SwiftUI views. This means that this doesn't work:
 
- ```swift
+ 
+swift
  RichTextEditor(text: $text, context: context)
      .toolbar {
          ToolbarItemGroup(placement: .keyboard) {
              ....
          }
      }
- ```
+
 
  This code will not show anything when you start to edit the
- text. To work around this use a ``RichTextKeyboardToolbar``.
+ text. To work around this use a `RichTextKeyboardToolbar.
 
- You may have noticed that `updateUIView/updateNSView` don't
+ You may have noticed that updateUIView/updateNSView don't
  contain any code. This is because having updates there will
  update this view, which in turn makes typing very slow.
  */
 public struct RichTextEditor: ViewRepresentable {
+    private var font: NSFont?
 
-    /**
-     Create a rich text editor with a certain text that uses
-     a certain rich text data format.
-
-     - Parameters:
-       - text: The rich text to edit.
-       - context: The rich text context to use.
-       - config: The rich text configuration to use, by deafult `.standard`.
-       - format: The rich text data format, by default `.archivedData`.
-     */
     public init(
         text: Binding<NSAttributedString>,
         context: RichTextContext,
         config: RichTextView.Configuration = .standard,
         format: RichTextDataFormat = .archivedData,
+        placeholder: NSAttributedString? = nil,  // Placeholder is an NSAttributedString
+        font: NSFont? = nil,  // Optional font
         viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
         self.config = config
+        self.placeholder = placeholder
+        self.font = font  // Pass font separately if needed
         self._context = ObservedObject(wrappedValue: context)
         self.format = format
         self.viewConfiguration = viewConfiguration
@@ -72,12 +67,12 @@ public struct RichTextEditor: ViewRepresentable {
     @ObservedObject
     private var context: RichTextContext
 
-
     private var text: Binding<NSAttributedString>
     private let config: RichTextView.Configuration
     private var format: RichTextDataFormat
     private var viewConfiguration: ViewConfiguration
-
+    private var placeholder: NSAttributedString?  // Store the placeholder
+    
     #if iOS || os(tvOS) || os(visionOS)
     public let textView = RichTextView()
     #endif
@@ -106,37 +101,49 @@ public struct RichTextEditor: ViewRepresentable {
         return textView
     }
 
-    public func updateUIView(_ view: UIViewType, context: Context) {}
+    public func updateUIView(_ view: UIViewType, context: Context) {
+    }
 
     #else
 
     public func makeNSView(context: Context) -> some NSView {
-        //   print("makeNSView called")
-        if text.wrappedValue.length > 0 {
-            let attributes = text.wrappedValue.attributes(at: 0, effectiveRange: nil)
-            //    print("Attributes before setup in makeNSView: \(attributes)")
-        }
-
-        //    print("Initial attributed string inside makeNSView : \(text.wrappedValue.string.prefix(100))") // Print the first 100 characters for brevity
-        
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
+
+ // Use a plain string for the placeholder
+    let plainPlaceholderString = placeholder?.string ?? ""
+    textView.setValue(plainPlaceholderString, forKey: "placeholderString")
+
         viewConfiguration(textView)
         return scrollView
     }
 
-    public func updateNSView(_ view: NSViewType, context: Context) {
-      //  print("updateNSView called")
-            let attributedString = text.wrappedValue
-        //   print("Updated attributed string inside updateNSView: \(attributedString.string.prefix(100))") // Print the first 100 characters for brevity
-
-            // Print attributes of the entire attributed string
-            attributedString.enumerateAttributes(in: NSRange(location: 0, length: attributedString.length), options: []) { attributes, range, _ in
-                //     print("Attributes inside updateNSView in range \(range): \(attributes)")
-            }
+ public func updateNSView(_ view: NSViewType, context: Context) {
+        // Update the placeholder
+        if let placeholder = placeholder {
+            textView.setValue(placeholder, forKey: "placeholderAttributedString")
+        }
+        
+        // Update the font
+        if let font = font {
+            textView.font = font
+        }
+        
+        // Ensure the view redraws
+        textView.needsDisplay = true
     }
+
+    
+
+    
+
+
+
     #endif
+    
+  
 }
+
 
 // MARK: RichTextPresenter
 
