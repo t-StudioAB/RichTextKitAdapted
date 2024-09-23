@@ -183,19 +183,16 @@ public extension RichTextContext {
 
     }
 
-    /// Reset the ``highlightedRange``.
+    /// Reset the `highlightedRange` and notify the editor.
     func resetHighlightedRange() {
-        guard hasHighlightedRange else {
-           // print("Attempted to reset highlighted range, but none was set.")
-            return
-        }
+        guard hasHighlightedRange else { return }
+        actionPublisher.send(.setHighlightedRange(nil))
         highlightedRange = nil
-        print("Highlighted range reset successfully.")
     }
 
-
-    /// Reset the ``selectedRange``.
+    /// Reset the `selectedRange` and notify the editor.
     func resetSelectedRange() {
+        actionPublisher.send(.selectRange(NSRange(location: 0, length: 0)))
         selectedRange = NSRange(location: 0, length: 0)
     }
 
